@@ -40,11 +40,4 @@ router.post("/signin", userSignIn);
  */
 router.get("/signout", isAuthenticated, userSignOut);
 
-/**
- * @method
- * @route
- * @access
- * @desc
- */
-
 module.exports = router;
