@@ -51,10 +51,6 @@ The server could not find the requested resource.
 */
 app.all( '*', (req, res, next) => {
     next(new ErrorHandler("Requested Url Not Found", 404))
-
-    // let err = new Error("Not Found");
-    // err.status = 404;
-    // next(err);
 });
   
 // Adding middleware to handle any errors that occur in our application
