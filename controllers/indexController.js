@@ -33,22 +33,6 @@ exports.userSignIn = catchAsynchErrors(async (req, res, next) => {
     : sendToken(user, 200, res, next);
 });
 
-// exports.userSignIn = catchAsynchErrors(async (req, res, next) => {
-//   let user = await userModel
-//     .findOne({ email: req.body.email })
-//     .select("+password")
-//     .exec();
-
-//   if (!user)
-//     return next(new ErrorHandler("No user exists with this credentials", 404));
-
-//   let isMatch = user.comparePassword(req.body.password);
-
-//   if (!isMatch) return next(new ErrorHandler("Wrong Credentials", 400));
-
-//   sendToken(user, 200, res, next);
-// });
-
 /*
   Controller function to handle login of a user.
 */
