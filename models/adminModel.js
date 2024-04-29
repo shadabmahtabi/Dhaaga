@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 const bycrpt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-const userSchema = new mongoose.Schema(
+// Admin Schema
+
+const adminSchema = new mongoose.Schema(
   {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -21,7 +23,7 @@ const userSchema = new mongoose.Schema(
     },
     address: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Address",
+      ref: 'Address'
     },
     phoneNumber: {
       type: String,
@@ -41,7 +43,7 @@ const userSchema = new mongoose.Schema(
 /*
   This function runs when .save() method is called and hash the password.
 */
-userSchema.pre("save", function () {
+adminSchema.pre("save", function () {
   if (!this.isModified("password")) {
     return;
   }
@@ -53,17 +55,17 @@ userSchema.pre("save", function () {
 /*
     This method is used to compare the passwords and returns true or false.
 */
-userSchema.methods.comparePassword = function (password) {
+adminSchema.methods.comparePassword = function (password) {
   return bycrpt.compareSync(password, this.password);
 };
 
 /*
     This method is used to create jwt token.
 */
-userSchema.methods.getjwttoken = function () {
+adminSchema.methods.getjwttoken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Admin", adminSchema);

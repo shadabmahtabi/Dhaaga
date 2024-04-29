@@ -30,11 +30,11 @@ app.use(cookieparser())
 
 // Importing routes from other files
 const indexRoutes = require('./routes/indexRouter');
-// const userRoutes = require('./routes/user-router');
-
+const adminRoutes = require('./routes/adminRouter');
 
 // Assigning / route for indexRouter
 app.use('/', indexRoutes)
+app.use('/admin', adminRoutes);
 
 // Error Handling
 const ErrorHandler = require('./utils/ErrorHandler');
