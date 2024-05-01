@@ -4,6 +4,8 @@ const {
   userSignUp,
   userSignIn,
   userSignOut,
+  bookDesigner,
+  verifyDesigner,
 } = require("../controllers/indexController");
 const { isAuthenticated } = require("../middlewares/auth");
 const router = express.Router();
@@ -39,5 +41,21 @@ router.post("/signin", userSignIn);
  * @desc    For handling User Log Out Requests From The Front End.
  */
 router.get("/signout", isAuthenticated, userSignOut);
+
+/**
+ * @method  POST
+ * @route   /book-designer
+ * @access  Private
+ * @desc    For handling booking a designer.
+ */
+router.post("/book-designer", bookDesigner);
+
+/**
+ * @method  POST
+ * @route   /verify/otp
+ * @access  Private
+ * @desc    For handling verification of OTP sent to mobile number.
+ */
+router.post("/verify/otp", verifyDesigner);
 
 module.exports = router;

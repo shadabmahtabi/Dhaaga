@@ -1,6 +1,7 @@
 const { catchAsynchErrors } = require("../middlewares/catchAsynchErrors");
 const userModel = require("../models/userModel");
 const ErrorHandler = require("../utils/ErrorHandler");
+const { sendOTP, verifyOTP } = require("../utils/sendMessage");
 const { sendToken } = require("../utils/sendToken");
 
 /*
@@ -41,4 +42,15 @@ exports.userSignOut = catchAsynchErrors(async (req, res, next) => {
     .clearCookie("token")
     .status(200)
     .json({ message: "Successfully Signed Out!" });
+});
+
+/*
+  Controller function for booking a designer.
+*/
+exports.bookDesigner = catchAsynchErrors(async (req, res, next) => {
+  sendOTP(req, res, next);
+});
+
+exports.verifyDesigner = catchAsynchErrors(async (req, res, next) => {
+  verifyOTP(req, res, next);
 });
