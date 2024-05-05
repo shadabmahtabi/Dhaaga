@@ -6,6 +6,9 @@ const {
   userSignOut,
   bookDesigner,
   verifyDesigner,
+  sendOtp,
+  verifyotp,
+  verifyOtp,
 } = require("../controllers/indexController");
 const { isAuthenticated } = require("../middlewares/auth");
 const router = express.Router();
@@ -52,10 +55,18 @@ router.post("/book-designer", bookDesigner);
 
 /**
  * @method  POST
+ * @route   /send/otp
+ * @access  Public
+ * @desc    For sending verification OTP to email or mobile number.
+ */
+router.post("/send/otp", sendOtp);
+
+/**
+ * @method  POST
  * @route   /verify/otp
  * @access  Private
- * @desc    For handling verification of OTP sent to mobile number.
+ * @desc    For handling verification of OTP sent to email or mobile number.
  */
-router.post("/verify/otp", verifyDesigner);
+router.post("/verify/otp", verifyOtp);
 
 module.exports = router;
