@@ -8,9 +8,6 @@ require('dotenv').config();
 require('./models/database').connectDatabase();
 
 // For showing logs
-/*
-    It shows which route is being used and when it's called.
-*/
 const logger = require('morgan');
 app.use(logger('dev'));
 
@@ -31,10 +28,12 @@ app.use(cookieparser())
 // Importing routes from other files
 const indexRoutes = require('./routes/indexRouter');
 const adminRoutes = require('./routes/adminRouter');
+const designerRoutes = require('./routes/designerRouter');
 
 // Assigning / route for indexRouter
 app.use('/', indexRoutes)
 app.use('/admin', adminRoutes);
+app.use('/designer', designerRoutes);
 
 // Error Handling
 const ErrorHandler = require('./utils/ErrorHandler');

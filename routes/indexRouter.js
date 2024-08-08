@@ -51,7 +51,7 @@ router.get("/signout", isAuthenticated, userSignOut);
  * @access  Private
  * @desc    For handling booking a designer.
  */
-router.post("/book-designer", bookDesigner);
+router.post("/bookdesigner", isAuthenticated, bookDesigner);
 
 /**
  * @method  POST
@@ -59,7 +59,7 @@ router.post("/book-designer", bookDesigner);
  * @access  Public
  * @desc    For sending verification OTP to email or mobile number.
  */
-router.post("/send/otp", sendOtp);
+router.post("/sendotp/:type", sendOtp);
 
 /**
  * @method  POST

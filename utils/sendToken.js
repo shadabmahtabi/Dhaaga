@@ -1,6 +1,6 @@
 const ErrorHandler = require("./ErrorHandler");
 
-exports.sendToken = async (user, statusCode, res, next) => {
+exports.sendToken = async (user, otpFromDB, statusCode, res, next) => {
   try {
     let token = await user.getjwttoken();
 
@@ -11,6 +11,8 @@ exports.sendToken = async (user, statusCode, res, next) => {
       httpOnly: true,
       // secure: true
     };
+
+    await otpFromDB.deleteOne();
 
     res.status(statusCode).cookie("token", token, options).json({
       succuss: true,
