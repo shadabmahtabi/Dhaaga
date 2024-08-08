@@ -32,7 +32,7 @@ exports.sendmail = async (req, res, next) => {
     const mailOptions = {
       from: "Majma Inc",
       to: email,
-      subject: type === "forgetForm" ? "Reset Password" : "Delete Account",
+      subject: "Dhaaga Enterprises Limited",
       html: `<h1>Your verification code is ${otp}.</h1><h2>Do not share this with anyone!</h2>`,
     };
 

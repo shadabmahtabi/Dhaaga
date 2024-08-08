@@ -31,31 +31,16 @@ const userSchema = new mongoose.Schema(
       maxLength: ["10", "Phone number must not exceeds 10 digits."],
       //   match: [/^\+91\s\d{10}$/, "Please fill a valid mobile number."]
     },
+    appointments: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Appointment"
+    }],
     dateOfBirth: { type: Date },
     gender: { type: String, enum: ["Male", "Female", "Other"] },
     profilePicture: { type: String }, // URL to the profile picture
   },
   { timestamps: true }
 );
-
-/*
-  This function runs when .save() method is called and hash the password.
-*/
-// userSchema.pre("save", function () {
-//   if (!this.isModified("password")) {
-//     return;
-//   }
-
-//   let salt = bycrpt.genSaltSync(10);
-//   this.password = bycrpt.hashSync(this.password, salt);
-// });
-
-/*
-    This method is used to compare the passwords and returns true or false.
-*/
-// userSchema.methods.comparePassword = function (password) {
-//   return bycrpt.compareSync(password, this.password);
-// };
 
 /*
     This method is used to create jwt token.

@@ -81,18 +81,18 @@ exports.userSignOut = catchAsynchErrors(async (req, res, next) => {
 */
 exports.bookDesigner = catchAsynchErrors(async (req, res, next) => {
   const { date, time, category } = req.body;
-  const designer = await designerModel.findOne({ category: category }).exec();
+  // const designer = await designerModel.findOne({ category: category }).exec();
   const user = req.user;
 
-  if (!designer) {
-    return next(new ErrorHandler("Designer not found", 404));
-  }
+  // if (!designer) {
+  //   return next(new ErrorHandler("Designer not found", 404));
+  // }
 
   const appointments = await appointmentModel
-    .findOne({ user: user._id })
-    .populate("designer");
+    .find({ user: user._id }).exec();
+    // .populate("designer");
 
-  if (appointments && appointments.designer.category === category) {
+  if (appointments && appointments.category === category) {
     return next(
       new ErrorHandler(
         `Your appointment is already scheduled on ${appointments.date} at ${appointments.time}.`
@@ -102,15 +102,15 @@ exports.bookDesigner = catchAsynchErrors(async (req, res, next) => {
 
   const appointment = new appointmentModel({
     user: user._id,
-    designer: designer._id,
+    // designer: designer._id,
     date,
     time,
     category,
   });
 
+  user.appointments.push(appointment);
   await appointment.save();
-  designer.appointments.push(appointment);
-  await designer.save();
+  await user.save();
 
   res.status(201).json({ appointment });
 });
