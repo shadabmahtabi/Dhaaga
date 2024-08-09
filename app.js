@@ -7,6 +7,9 @@ require('dotenv').config();
 // db connection
 require('./models/database').connectDatabase();
 
+// enabling cors policy
+app.use(cors());
+
 // For showing logs
 const logger = require('morgan');
 app.use(logger('dev'));
