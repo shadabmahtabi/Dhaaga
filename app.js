@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
 
 // For initializing environment variables i.e., PORT, etc.
 require('dotenv').config();
